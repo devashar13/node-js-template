@@ -1,36 +1,35 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
   mongo_data:
     driver: local
 
 services:
-    mongo:
-        image: "mongo"
-        restart: always
-        volumes:
-            - mongo_data:/data/db
-        environment:
-            - MONGO_INITDB_DATABASE=admin
-            - MONGO_INITDB_ROOT_USERNAME=admin
-            - MONGO_INITDB_ROOT_PASSWORD=password
-        expose:
-            - "27017"
-        ports:
-            - 27017:27017
-    server:
-      container_name: nodejs_template
-      build:
-        context: .
-        dockerfile: dockerfile.dev
-      ports:
-        - 4000:4000
-      env_file:
-        - .env
-      depends_on:
-        - mongo
-      links:
-        - mongo
-      volumes:
-        - .:/app
-        - /app/node_modules
+  mongo:
+    image: 'mongo'
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=server
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    expose:
+      - '27019'
+    ports:
+      - 27019:27017
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    ports:
+      - 4000:4000
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    volumes:
+      - .:/app

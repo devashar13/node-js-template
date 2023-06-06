@@ -3,6 +3,8 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 RUN chown -R node:node /app
+USER root
+RUN npm install -g pnpm --unsafe-perm
 USER node
-RUN npm install
-CMD ["npm", "run","dev"]
+RUN pnpm install
+CMD ["pnpm","dev"]

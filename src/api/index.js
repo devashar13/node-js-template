@@ -1,7 +1,7 @@
-const { dummyRouter } = require('./routes')
+const { mailRouter } = require('./routes')
 
 const initRoutes = ({ expressApp }) => {
-  expressApp.use('/dummy', dummyRouter)
+  expressApp.use('/api/mail', mailRouter)
 }
 
 module.exports = initRoutes

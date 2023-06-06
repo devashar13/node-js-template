@@ -1,5 +1,5 @@
-const dummyRouter = require('./dummy/index.js')
+const mailRouter = require('./mail/index.js')
 
 module.exports = {
-  dummyRouter,
+  mailRouter,
 }
